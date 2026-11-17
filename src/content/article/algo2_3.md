@@ -205,3 +205,55 @@ int main(){
     cout << dp[n][W] << "\n";
 }
 ```
+次に，ナップサック問題について少し，制約を少し大きくしたものについて考えていきます．
+<div class = "box">
+
+### ナップサック問題2
+n個の商品のうち，各商品iについてその重量を$w_i$，価値を$v_i$とする．これらの商品から，総重量が$W$を超えないように商品を選ぶときの総価値の最大値を求めよ．
+制約：$1 \leq n \leq 100, 1 \leq w_i\leq 10^7, ~ 1 \leq v_i \leq 100, 1 \leq W \leq 10^9$
+
+</div>
+
+前回と同様重さに対する価値でdpをすると計算量は$O(nW)$なのでTLEとなります．そこで今回は価値に対する重さで計算します．
+dp[i + 1][j]:i番目までの商品から総勝ちがjとなるように選んだ時の総重量の最小値（そのような値が存在しない場合は，十分大きな値INFｗ）
+として定める．0番目までの商品は選べないので，初期値をINFとしておく．
+この時，i番目までの商品から総価値がjとなるように選ぶためには，
+- i-1番目までの総価値がjとなるように選ぶ
+- i-1番目までの商品からの総価値がj-v[i]となるように選び，i番目の商品を加える
+
+の2通りがある．そのため，漸化式は，次のようになる
+$dp[i + 1][j] = min(dp[i][j], dp[i][j - v[i]] + w[i])$
+すると計算量は$O(n \underset{i}{\sum}v_i)$となる
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+using INF = 2 << 30;
+int main(){
+    int n;
+    cin >> n;
+    vector<int> w(n);
+    vector<int> v(n);
+    int W;
+    for(int k = 0; k < 2; k++){
+        for(int i = 0; i < n; i++){
+            if(k == 0)cin >> w[i];
+            else if(k == 1)cin >> v[i];
+        }
+    }
+    int nm = n * 100
+    vector<vector<int>> dp(n, vector<int>( nm, INF))
+    dp[0][0] = 0;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j <= nm; j++){
+            if(i < v[i])dp[i + 1][j] = dp[i][j];
+            else dp[i + 1][j] = min(dp[i][j], dp[i][j − v[i]] + w[i])
+        }
+    }
+    int res = 0;
+    for(int i = 0; i <= nml i++){
+        if(dp[n][i] <= W )res = i;
+    }
+    cout << res << "\n";
+}
+```
