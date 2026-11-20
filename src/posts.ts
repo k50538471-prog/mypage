@@ -49,7 +49,7 @@ export async function getArticles(n?: number) {
 		.map((a) => ({
 			title: a.data.title,
 			description: a.data.description,
-			date: a.data.date.toISOString(),
+			date: a.data.date.toISOString().slice(0, 10),
 			topic: a.data.topic,
 			tags: a.data.tags,
 			url: a.data.href ?? `/article/${a.id}/`,
