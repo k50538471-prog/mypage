@@ -1,29 +1,29 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection} from "astro:content";
-import { getAll } from "../../posts.ts";
+import { getAll, getArticles } from "../../posts.ts";
 // article の index ページ
 // いまはダミーデータ．あとで getCollection や articles.json に置き換える．
- 
+  
 interface Article {
   title: string;
   href: string;
   date: string; // YYYY-MM-DD
   topic: string; // topics の slug
 }
- 
+  
 interface Topic {
   slug: string;
   name: string;
   description: string;
 }
- 
+  
 const topics: Topic[] = [
   { slug: "math", name: "数学", description: "位相空間論や代数学のノート．" },
   { slug: "algorithm", name: "アルゴリズム", description: "ソート，グラフ，動的計画法など．" },
   { slug: "computer", name: "コンピュータ", description: "情報系いろいろ" },
 ];
- 
+  
 /*const articles: Article[] = [
   { title: "クイックソートの計算量", href: "/article/quicksort/", date: "2026-10-20", topic: "algorithm" },
   { title: "シローの定理", href: "/article/sylow/", date: "2026-10-15", topic: "" },
@@ -33,20 +33,22 @@ const topics: Topic[] = [
 
 const topicName = (slug: string) =>"#" + (topics.find((t) => t.slug === slug)?.name ?? slug);
 
-const allart = (await getAll()).map((all) => ({
+/* const allart = (await getAll()).map((all) => ({
   title: all.title,
   description: all.description,
   date: all.date.toISOString().slice(0, 10),
   href: all.url,
-}));
+})); */
 
- const entries = await getCollection("article");
- const articles = entries.map((e) => ({
-   title: e.data.title,
-   href:  e.data.href ?? `/article/${e.id}/`,
-   date: e.data.date.toISOString().slice(0, 10),
-   topic: e.data.topic,
- }));
+const allart = await getArticles();
+
+  const entries = await getCollection("article");
+  const articles = entries.map((e) => ({
+    title: e.data.title,
+    href:  e.data.href ?? `/article/${e.id}/`,
+    date: e.data.date.toISOString().slice(0, 10),
+    topic: e.data.topic,
+  }));
 
 const recent = [...articles]
   .sort((a, b) => b.date.localeCompare(a.date))
