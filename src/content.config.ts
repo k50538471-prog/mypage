@@ -22,7 +22,7 @@ const article = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
-		date: z.coerce.date(),
+		date: z.string(),
 		updatedDate: z.coerce.date().optional(),
 		topic: z.enum(topics),
 		tags: z.array(z.string()).optional(),
