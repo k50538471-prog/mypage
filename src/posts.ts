@@ -54,7 +54,7 @@ export async function getArticles(n?: number) {
 			tags: a.data.tags,
 			url: a.data.href ?? `/article/${a.id}/`,
 		}))
-		.sort(byDateDesc);
+		.sort((a, b) => b.date.localeCompare(a.date))
 	return n ? sorted.slice(0, n) : sorted;
 }
 
