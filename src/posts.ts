@@ -54,7 +54,7 @@ export async function getArticles(n?: number) {
 			tags: a.data.tags,
 			url: a.data.href ?? `/article/${a.id}/`,
 		}))
-		.sort((a, b) => b.date.localeCompare(a.date))
+		.sort((a, x) => x.date.localeCompare(a.date))
 	return n ? sorted.slice(0, n) : sorted;
 }
 
@@ -64,10 +64,10 @@ export async function getBlogs(n?: number) {
 		.map((b) => ({
 			title: b.data.title,
 			description: b.data.description,
-			date: b.data.date,
+			date: b.data.date.toISOString().slice(0, 10),
 			url: `/blog/${b.id}/`,
 		}))
-		.sort(byDateDesc);
+		.sort((b, x) => x.date.localeCompare(b.date))
 	return n ? sorted.slice(0, n) : sorted;
 }
 
