@@ -66,6 +66,7 @@ export async function getBlogs(n?: number) {
 			description: b.data.description,
 			date: b.data.date.toISOString().slice(0, 10),
 			url: `/blog/${b.id}/`,
+			tags: b.data.tags ?? [],
 		}))
 		.sort((b, x) => x.date.localeCompare(b.date))
 	return n ? sorted.slice(0, n) : sorted;
