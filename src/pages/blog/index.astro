@@ -34,14 +34,12 @@ const md = (d: string) => d.slice(5).replace('-', '/');
               <a class = "article" href={p.url}>
               <time datetime={p.date}>{md(p.date)}</time>
               <span class = "title">{p.title}</span>
-              <div>
                 {p.description && <p class="desc">{p.description}</p>}
                 {p.tags?.length > 0 && (
                   <ul class="tags">
                     {p.tags.map((t) => <li>{t}</li>)}
                   </ul>
                 )}
-              </div>
               </a>
           ))}
         </section>
