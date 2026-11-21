@@ -39,7 +39,7 @@ const topicName = (slug: string) =>"#" + (topics.find((t) => t.slug === slug)?.n
   href: all.url,
 })); */
 
-const allart = await getArticles();
+const posts = await getArticles();
 
   const entries = await getCollection("article");
   const articles = entries.map((e) => ({
@@ -85,12 +85,12 @@ const recent = [...articles]
     <p>記事一覧</p>
   <!--<p class="lead"></p> -->
   <ul class="all">
-    {allart.map((all) => (
+    {posts.map((p) => (
       <li>
-        <a class ="all-colum"href={all.url}>
-        <time datetime={all.date}>{all.date}</time>
-        <span class="title">{all.title}</span>
-        <span>{all.description}</span>
+        <a class ="all-colum"href={p.url}>
+        <time datetime={p.date}>{p.date}</time>
+        <span class="title">{p.title}</span>
+        <span class = "desc">{p.description}</span>
         </a>
       </li>
     ))}
@@ -115,7 +115,7 @@ const recent = [...articles]
   }*/
   main {
     box-sizing: border-box;
-    max-width: 46rem;
+    width: 50rem;
     margin: 0 auto;
     padding: 30px 24px 60px;
   }
