@@ -33,7 +33,7 @@ const md = (d: string) => d.slice(5).replace('-', '/');
           {items.map((p) => (
               <a class = "article" href={p.url}>
               <time datetime={p.date}>{md(p.date)}</time>
-              {p.title}
+              <span class = "title">{p.title}</span>
               <div>
                 {p.description && <p class="desc">{p.description}</p>}
                 {p.tags?.length > 0 && (
@@ -117,15 +117,29 @@ const md = (d: string) => d.slice(5).replace('-', '/');
     color: var(----text); 
     text-decoration: none;
   }*/
-  .article:hover .home-title,
-  .article:focus-visible .home-title {
+  .article:hover .title .desc,
+  .article:focus-visible .title .desc {
     text-decoration: none;
     color: #78a7b4;
   }
 
-  .desc { margin: 0.25rem 0 0.5rem; color: var(--muted); font-size: 0.875rem; line-height: 1.7; }
+  .desc { 
+    grid-column: 1 / -1;
+    margin: 0.25rem 0 0.5rem; 
+    color: var(--muted); 
+    font-size: 0.875rem; 
+    line-height: 1.7; 
+  }
 
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+  .tags { 
+    grid-column: 2 / -1;
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 6px; 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+  }
   .tags li { font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; background: var(--chip-bg); color: var(--chip-fg); }
 
   @media (max-width: 480px) {
