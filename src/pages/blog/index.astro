@@ -94,7 +94,7 @@ const md = (d: string) => d.slice(5).replace('-', '/');
   h2::after { content: ""; flex: 1; border-bottom: 1px solid var(--line); }
   section { margin-bottom: 2rem; }
 
-  article {
+  .article {
     display: grid; 
     grid-template-columns: 4.5rem minmax(0, 1fr); 
     gap: 0 16px;
@@ -107,7 +107,7 @@ const md = (d: string) => d.slice(5).replace('-', '/');
     color: var(----text); 
     text-decoration: none;
   }
-  article:last-child { border-bottom: none; }
+  .article:last-child { border-bottom: none; }
   time { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 0.875rem; color: var(--muted); padding-top: 0.2rem; }
 
   /*article a { 
@@ -129,7 +129,7 @@ const md = (d: string) => d.slice(5).replace('-', '/');
   .tags li { font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; background: var(--chip-bg); color: var(--chip-fg); }
 
   @media (max-width: 480px) {
-    article { grid-template-columns: 1fr; }
+    .article { grid-template-columns: 1fr; }
     time { padding-top: 0; }
   }
 </style>
