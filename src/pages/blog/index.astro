@@ -31,7 +31,6 @@ const md = (d: string) => d.slice(5).replace('-', '/');
         <section>
           <h2><span>{year}</span></h2>
           {items.map((p) => (
-            <article>
               <a class = "article" href={p.url}>{p.title}
               <time datetime={p.date}>{md(p.date)}</time>
               <div>
@@ -44,7 +43,6 @@ const md = (d: string) => d.slice(5).replace('-', '/');
                 )}
               </div>
               </a>
-            </article>
           ))}
         </section>
       ))}
