@@ -115,14 +115,15 @@ const md = (d: string) => d.slice(5).replace('-', '/');
     color: var(----text); 
     text-decoration: none;
   }*/
-  .article:hover .title .desc,
-  .article:focus-visible .title .desc {
-    text-decoration: none;
+  .article:hover .title,
+  .article:hover .desc,
+  .article:focus-visible .title,
+  .article:focus-visible .desc {
     color: #78a7b4;
   }
 
   .desc { 
-    grid-column: 1 / -1;
+    grid-column: 2;
     margin: 0.25rem 0 0.5rem; 
     color: var(--muted); 
     font-size: 0.875rem; 
@@ -130,7 +131,7 @@ const md = (d: string) => d.slice(5).replace('-', '/');
   }
 
   .tags { 
-    grid-column: 2 / -1;
+    grid-column: 2;
     display: flex; 
     flex-wrap: wrap; 
     gap: 6px; 
