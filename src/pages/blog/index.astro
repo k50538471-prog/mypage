@@ -1,0 +1,121 @@
+---
+// src/pages/blog/index.astro
+// src/pages/blog/*.md の frontmatter(title, date, description, tags)から一覧を作る
+const modules = import.meta.glob('./*.md', { eager: true });
+
+const posts = Object.entries(modules)
+  .filter(([path]) => !path.endsWith('index.md'))
+  .map(([path, mod]: [string, any]) => ({
+    url: '/blog/' + path.replace('./', '').replace(/\.md$/, '') + '/',
+    title: mod.frontmatter?.title ?? path,
+    date: mod.frontmatter?.date ? new Date(mod.frontmatter.date) : null,
+    description: mod.frontmatter?.description ?? '',
+    tags: (mod.frontmatter?.tags ?? []) as string[],
+  }))
+  .sort((a, b) => (b.date?.getTime() ?? 0) - (a.date?.getTime() ?? 0));
+
+// 年ごとにまとめる(新しい年が先)
+const byYear = new Map<string, typeof posts>();
+for (const p of posts) {
+  const y = p.date ? String(p.date.getFullYear()) : 'その他';
+  byYear.set(y, [...(byYear.get(y) ?? []), p]);
+}
+const years = [...byYear.entries()];
+
+const md = (d: Date | null) =>
+  d
+    ? String(d.getMonth() + 1).padStart(2, '0') + '/' + String(d.getDate()).padStart(2, '0')
+    : '';
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>blog</title>
+  </head>
+  <body>
+    <main>
+      <h1>blog</h1>
+      <p class="lead">勉強したことや作ったものの雑記．</p>
+
+      {posts.length === 0 && <p>まだ記事がありません．</p>}
+
+      {years.map(([year, items]) => (
+        <section>
+          <h2><span>{year}</span></h2>
+          {items.map((p) => (
+            <article>
+              <time datetime={p.date?.toISOString()}>{md(p.date)}</time>
+              <div>
+                <a href={p.url}>{p.title}</a>
+                {p.description && <p class="desc">{p.description}</p>}
+                {p.tags.length > 0 && (
+                  <ul class="tags">
+                    {p.tags.map((t) => <li>{t}</li>)}
+                  </ul>
+                )}
+              </div>
+            </article>
+          ))}
+        </section>
+      ))}
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    --fg: #222;
+    --muted: #666;
+    --line: #ddd;
+    --accent: #1a5fb4;
+    --chip-bg: #eef2f7;
+    --chip-fg: #3a4a5e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg: #e6e6e6;
+      --muted: #9a9a9a;
+      --line: #333;
+      --accent: #7fb2f0;
+      --chip-bg: #263040;
+      --chip-fg: #b9c6d8;
+    }
+  }
+
+  main { max-width: 42rem; margin: 0 auto; padding: 3rem 1rem; color: var(--fg); line-height: 1.8; }
+  h1 {
+    font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    font-size: 2.1rem; font-weight: 500; letter-spacing: 0.02em; margin: 0 0 0.5rem;
+  }
+  .lead { margin: 0 0 2.5rem; color: var(--muted); font-size: 0.95rem; }
+
+  h2 {
+    display: flex; align-items: baseline; gap: 12px; margin: 0 0 0.25rem;
+    font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    font-size: 1.35rem; font-weight: 500;
+  }
+  h2::after { content: ""; flex: 1; border-bottom: 1px solid var(--line); }
+  section { margin-bottom: 2rem; }
+
+  article {
+    display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 0 16px;
+    padding: 1.1rem 0; border-bottom: 1px solid var(--line);
+  }
+  article:last-child { border-bottom: none; }
+  time { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 0.875rem; color: var(--muted); padding-top: 0.2rem; }
+
+  article a { font-size: 1.125rem; font-weight: 500; line-height: 1.5; color: var(--accent); text-decoration: none; }
+  article a:hover { text-decoration: underline; }
+  .desc { margin: 0.25rem 0 0.5rem; color: var(--muted); font-size: 0.875rem; line-height: 1.7; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+  .tags li { font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; background: var(--chip-bg); color: var(--chip-fg); }
+
+  @media (max-width: 480px) {
+    article { grid-template-columns: 1fr; }
+    time { padding-top: 0; }
+  }
+</style>
