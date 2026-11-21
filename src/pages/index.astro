@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/homecss.css";
-import { getRecentAll, getRecentArticles } from "../posts.ts";
+import { getRecentAll, getRecentArticles, getBlogs } from "../posts.ts";
 const intro = [
   "こんにちは，のんです．",
   "インフラエンジニア志望の現在数学科所属の大学2年生です．アルゴリズム，c++，ネットワークセキュリティなどを勉強しています．",
@@ -50,6 +50,11 @@ const articlerecently = (await getRecentArticles(3)).map((a) => ({
   href: a.url,
 }));
 
+const blogrecently = (await getBlogs(3)).map((b) => ({
+  title: b.title,
+  date: b.date.toISOString().slice(0, 10),
+  href: b.url,
+}));
 
 /*const recent = [...articles]
   .sort((a, b) => b.date.localeCompare(a.date))
@@ -106,14 +111,15 @@ const articlerecently = (await getRecentArticles(3)).map((a) => ({
         <div class="home-card">
           <a href="/blog/"><h2>blog</h2></a>
           <p class="home-desc">ブログを投稿しています．</p>
-          <!--<ul class="home-links list">
-            {blogPosts.map((p) => (
-              <li>
-                <a href={p.href}><span>{p.title}</span></a>
-              </li>
-            ))}
-          </ul>-->
-          <h1>準備中</h1>
+          <ul class="home-links list">
+            {blogrecently.map((b) => (
+            <a href={b.href}><li class = "article-list">
+              <time datetime={b.date}>{b.date}</time>
+              <span>{b.title}</span>
+              {/*<span class="topic">{topicName(a.topic)}</span>*/}
+            </li></a>
+          ))}
+          </ul>
           <a class="home-more strong" href="/blog/">blog 一覧へ →</a>
         </div>
       </section>
