@@ -52,7 +52,7 @@ const articlerecently = (await getRecentArticles(3)).map((a) => ({
 
 const blogrecently = (await getBlogs(3)).map((b) => ({
   title: b.title,
-  date: b.date.toISOString().slice(0, 10),
+  date: b.date,
   href: b.url,
 }));
 
