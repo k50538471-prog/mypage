@@ -1,7 +1,10 @@
 ---
 // src/pages/blog/index.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getBlogs } from "../../posts.ts"; // getBlogs を置いているパスに合わせて直す
+// blog の index
 
+// blogを全件取得
 const posts = await getBlogs();
 
 // 年ごとにまとめる(date は 'YYYY-MM-DD' の文字列、新しい年が先)
@@ -15,17 +18,12 @@ const years = [...byYear.entries()];
 const md = (d: string) => d.slice(5).replace('-', '/');
 ---
 
-<!doctype html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<BaseLayout>
     <title>blog</title>
-  </head>
   <body>
     <main>
       <h1>blog</h1>
-      <p class="lead">勉強したことや作ったものの雑記．</p>
+      <p class="lead">勉強したことや日常の雑記．</p>
 
       {posts.length === 0 && <p>まだ記事がありません．</p>}
 
@@ -50,7 +48,7 @@ const md = (d: string) => d.slice(5).replace('-', '/');
       ))}
     </main>
   </body>
-</html>
+</BaseLayout>
 
 <style>
   :root {
