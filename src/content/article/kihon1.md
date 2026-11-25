@@ -55,7 +55,7 @@ GoogleMapやGmailがある
 分析する要素を全体の中の割合が多い順に棒グラフとして並べ，それに累積構成比を表す折れ線グラフを組み合わせた複合グラフ
 
 <figure>
-  <img src="../../assets/example_pareto_chart.png" width="400" alt="パレート図の例">
+  <img src="/images/example_pareto_chart.png" width="400" alt="パレート図の例">
   <figcaption>パレート図の例（<a href = "https://www.stat.go.jp/naruhodo/9_graph/jyokyu/pareto.html">総務統計局</a>より引用）</figcaption>
 </figure>
 
@@ -78,7 +78,7 @@ XMLをベースとしたメタデータ記述によるマルチメディアデ�
 イーサネットの場合，48ビットの符号で，最初24ビットがベンダID,次8ビットが機種ID,最後16ビットが製品のシリアルナンバーとなっている．
 
 <figure>
-  <img src="../../assets/MACaddress.jpg" width="400" alt="パレート図の例">
+  <img src="/images/MACaddress.jpg" width="400" alt="パレート図の例">
   <figcaption>MACアドレスの図解</figcaption>
 </figure>
 
