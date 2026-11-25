@@ -54,10 +54,8 @@ GoogleMapやGmailがある
 ## パレート図
 分析する要素を全体の中の割合が多い順に棒グラフとして並べ，それに累積構成比を表す折れ線グラフを組み合わせた複合グラフ
 
-<figure>
-  <img src="/images/example_pareto_chart.png" width="400" alt="パレート図の例">
-  <figcaption>パレート図の例（<a href = "https://www.stat.go.jp/naruhodo/9_graph/jyokyu/pareto.html">総務統計局</a>より引用）</figcaption>
-</figure>
+![パレート図の例](/images/example_pareto_chart.png)
+<figcaption>パレート図の例（<a href = "https://www.stat.go.jp/naruhodo/9_graph/jyokyu/pareto.html">総務統計局</a>より引用）</figcaption>
 
 ## MPEGの規格
 - MPEG-1
@@ -81,6 +79,10 @@ XMLをベースとしたメタデータ記述によるマルチメディアデ�
   <img src="/images/MACaddress.jpg" width="400" alt="パレート図の例">
   <figcaption>MACアドレスの図解</figcaption>
 </figure>
+
+> 1つ目の段落.
+>
+> 2つ目の段落.
 
 ## MIME
 ASCII文字しか使用できないSMTPを利用したメールで日本語の2バイトコードや画像データを送信する際利用する．
