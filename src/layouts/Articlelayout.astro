@@ -198,6 +198,19 @@ const showToc = toc && tocItems.length > 0;
   .prose :global(img) { max-width: 100%; height: auto; border-radius: 4px; }
   .prose :global(blockquote) { margin: 0 0 20px; padding: 14px 16px; background: var(--soft); border-radius: 6px; }
   .prose :global(blockquote p:last-child) { margin: 0; }
+  .prose :global(figure){ margin: 1.5rem 0;}
+  .prose :blobal(figure img) { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+  .prose :global(figcaption) { text-align: center; font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
+
+  /*表の書式 */
+  .prose :global(table) {
+  table-layout: auto;
+  width: 100%;
+  }
+  .prose :global(td:nth-child(1)),
+    .prose :global(td:nth-child(1)) {
+  white-space: nowrap;
+  }
   /* ---- box 環境 ---- */
   .prose :global(.box) {
     margin: 0 0 24px;
