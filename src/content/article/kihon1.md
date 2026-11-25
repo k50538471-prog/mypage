@@ -55,6 +55,7 @@ GoogleMapやGmailがある
 分析する要素を全体の中の割合が多い順に棒グラフとして並べ，それに累積構成比を表す折れ線グラフを組み合わせた複合グラフ
 
 ![パレート図の例](/images/example_pareto_chart.png)
+
 <figcaption>パレート図の例（<a href = "https://www.stat.go.jp/naruhodo/9_graph/jyokyu/pareto.html">総務統計局</a>より引用）</figcaption>
 
 ## MPEGの規格
@@ -75,10 +76,9 @@ XMLをベースとしたメタデータ記述によるマルチメディアデ�
 ネットワーク上の各機器を識別するために機器ごとに割り当てられている番号
 イーサネットの場合，48ビットの符号で，最初24ビットがベンダID,次8ビットが機種ID,最後16ビットが製品のシリアルナンバーとなっている．
 
-<figure>
-  <img src="/images/MACaddress.jpg" width="400" alt="パレート図の例">
-  <figcaption>MACアドレスの図解</figcaption>
-</figure>
+![](/images/MACaddress.jpg)
+
+<figcaption>MACアドレスの図解</figcaption>
 
 > 1つ目の段落.
 >
